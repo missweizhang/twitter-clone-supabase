@@ -5,6 +5,8 @@ import AuthButton from './components/AuthButton';
 import NewTweet from './components/NewTweet';
 import Tweets from './components/Tweets';
 
+export const dynamic = 'force-dynamic';
+
 export default async function Home() {
   const supabase = createServerComponentClient<Database>({ cookies });
   const {

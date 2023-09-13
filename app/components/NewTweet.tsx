@@ -6,9 +6,10 @@ import Image from 'next/image';
 export const dynamic = 'force-dynamic';
 
 export default function NewTweet({ user }: { user: User }) {
+  const supabase = createServerActionClient({ cookies });
+
   const addTweet = async (formData: FormData) => {
     'use server';
-    const supabase = createServerActionClient({ cookies });
 
     const title = String(formData.get('title'));
     await supabase.from('tweets').insert({ user_id: user.id, title });

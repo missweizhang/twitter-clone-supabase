@@ -3,7 +3,7 @@
 import { useEffect, experimental_useOptimistic as useOptimistic } from 'react';
 import { useRouter } from 'next/navigation';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
-import Likes from './Likes.tsx';
+import Likes from './Likes';
 import Image from 'next/image.js';
 
 export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
@@ -32,7 +32,9 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
       )
       .subscribe();
 
-    return () => supabase.removeChannel(channel);
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, [supabase, router]);
 
   return optimisticTweets.map((tweet) => (
