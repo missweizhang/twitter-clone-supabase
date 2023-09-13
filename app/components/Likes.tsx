@@ -3,6 +3,7 @@
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { useRouter } from 'next/navigation';
 import { experimental_useFormStatus as useFormStatus } from 'react-dom';
+import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 
 export default function Likes({
   tweet,
@@ -53,11 +54,24 @@ export default function Likes({
 
   return (
     <button
-      className="px-2 text-rose-500 border border-rose-500 hover:bg-rose-100 rounded-md cursor-pointer"
       onClick={handleLikes}
       disabled={pending}
+      className="flex items-center group"
     >
-      {tweet.likes} Likes
+      {tweet.user_liked ? (
+        <AiFillHeart className="text-red-600 group-hover:text-gray-500" />
+      ) : (
+        <AiOutlineHeart className="text-gray-500 group-hover:text-red-600" />
+      )}
+      <div
+        className={`ml-2 text-sm ${
+          tweet.user_liked
+            ? 'text-red-600 group-hover:text-gray-500'
+            : 'text-gray-500 group-hover:text-red-600'
+        }`}
+      >
+        {tweet.likes}
+      </div>
     </button>
   );
 }
